@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
-# Copyright 2019 by the bsc docker image contributors
+# Copyright 2020 by the bsc docker image contributors
 # SPDX-License-Identifier: GPL-3.0-only
 #
 # Author(s): Pavel Benacek <pavel.benacek@gmail.com>
 
 
-echo "Preparing all directories"
+echo "Preparing all directories ..."
 
 git clone --recursive https://github.com/B-Lang-org/bsc.git bsc
 git clone --recursive https://github.com/B-Lang-org/bsc-contrib bsc-contrib
