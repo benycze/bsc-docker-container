@@ -20,7 +20,7 @@ services:
 
 # Prepare the docker image in installation stage
 install:
-    - bash bootstrap.sh && docker build -t localhost/bsc-compiler --build-arg BJOBS=2.
+    - bash bootstrap.sh && docker build -t localhost/bsc-compiler --build-arg BJOBS=2 .
 
 # Run the bluespec test in container
 script:
