@@ -9,7 +9,7 @@ branches:
     - master
 
 # Select the language
-language: generic
+language: bash
 
 # Select the OS to use
 os:
