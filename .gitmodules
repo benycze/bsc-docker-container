@@ -1,9 +1,0 @@
-[submodule "bsc"]
-	path = bsc
-	url = https://github.com/B-Lang-org/bsc.git
-[submodule "bsc-contrib"]
-	path = bsc-contrib
-	url = https://github.com/B-Lang-org/bsc-contrib
-[submodule "doc"]
-	path = doc
-	url = https://github.com/BSVLang/Main.git

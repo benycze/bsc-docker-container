@@ -12,7 +12,7 @@ Clone the repository using this command (gets all dependencies):
 
 ```bash
 git clone https://github.com/benycze/bsc-docker-container
-git submodule update --init --recursive
+bash bootstrap.sh
 ```
 
 I am trying to update and test everything as frequently as possible but if you need a specific version or update to fresh master you can do it on your own.
@@ -20,10 +20,10 @@ I am trying to update and test everything as frequently as possible but if you n
 Update everything to fresh master branches
 
 ```bash
-git submodule update --recursive --remote
+for i in bsc bsc-contrib doc; do (cd $i; git pull); done
 ```
 
-Possibly, you can enter each submodule and select the right branch/version using the normal git tool. For example, if you need to switch the `bsc` submodule to devel branch just write:
+Possibly, you can enter each module and select the right branch/version using the normal git tool. For example, if you need to switch the `bsc` submodule to devel branch just write:
 
 ```bash
 cd bsc
