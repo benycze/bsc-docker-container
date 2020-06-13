@@ -24,7 +24,7 @@ install:
 
 # Run the bluespec test in container
 script:
-    - docker run -w /bluespec/bsc /bin/bash -c "cd examples/smoke_test && make smoke_test"
+    - docker run -w /bluespec/bsc localhost/bsc-compiler  /bin/bash -c "cd examples/smoke_test && make smoke_test"
 
 notifications:
   email: false
