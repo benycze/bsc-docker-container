@@ -11,7 +11,8 @@ The image  contains elementary development tools, [Bluespec compiler](https://gi
 Clone the repository using this command (gets all dependencies):
 
 ```bash
-git clone --recursive https://github.com/benycze/bsc-docker-container
+git clone https://github.com/benycze/bsc-docker-container
+git submodule update --init --recursive
 ```
 
 I am trying to update and test everything as frequently as possible but if you need a specific version or update to fresh master you can do it on your own.
@@ -45,5 +46,11 @@ This command builds the image named localhost/bsc-compiler and it also uses 4 jo
 The following command can be used to runt the image and mount the local working directory.
 
 ```bash
-TODO
+docker run -t bsc-compiler -i --mount=type=bind,source=~/bsc-work,destination=/bsc-work localhost/bsc-compiler
 ```
+
+This command will do the following:
+
+* Starts the container from the localhost/bsc-compiler image
+* Mounts the local ~/bsc-work directory into /bsc-work directory inside the image
+* Starts the container and attach the console
