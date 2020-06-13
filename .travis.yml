@@ -10,9 +10,9 @@ branches:
 
 # Select the OS to use
 os:
-    -linux
-    -osx
-    -windows
+    - linux
+    - osx
+    - windows
 
 # Allow docker to run tests inside it
 services:
