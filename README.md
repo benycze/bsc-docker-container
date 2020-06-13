@@ -17,10 +17,7 @@ git clone https://github.com/benycze/bsc-docker-container
 bash bootstrap.sh
 ```
 
-I am trying to update and test everything as frequently as possible but if you need a specific version or update to fresh master you can do it on your own.
-
-Update everything to fresh master branches
-
+If you need a specific version or update to fresh master you can do it on your own. Update everything to fresh master branches (in the case that you used the `boostrap.sh` file earlier):		
 ```bash
 for i in bsc bsc-contrib doc; do (cd $i; git pull); done
 ```
