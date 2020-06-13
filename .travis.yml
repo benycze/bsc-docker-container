@@ -8,6 +8,9 @@ branches:
     only:
     - master
 
+# Select the language
+language: generic
+
 # Select the OS to use
 os:
     - linux
