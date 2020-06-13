@@ -14,7 +14,6 @@ language: bash
 # Select the OS to use
 os:
     - linux
-    - windows
 
 # Allow docker to run tests inside it
 services:
