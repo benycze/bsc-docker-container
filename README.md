@@ -32,7 +32,7 @@ git checkout devel
 
 ## How to build the image
 
-The image is then built quite easily (the following example is for docker but you can use the same command using the podman):
+The image is then built quite easily (the following example is for docker but you can use the same command using the [podman](https://podman.io/) tool):
 
 ```bash
 docker build -t localhost/bsc-compiler --build-arg BJOBS=4 .
