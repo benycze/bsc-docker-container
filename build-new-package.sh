@@ -44,7 +44,7 @@ echo "  - reqs: $BSC_REQS"
 
 BSC_FOLDER="bsc_$1"
 mkdir -p buildroot/$BSC_FOLDER
-(cd bsc; make -j $JOBS PREFIX=/bluespec/buildroot/$BSC_FOLDER all)
+(cd bsc; make -j $JOBS GHCJOBS=$JOBS  PREFIX=/bluespec/buildroot/$BSC_FOLDER all)
 
 echo "Preparing the bsc package metadata ..."
 mkdir -p buildroot/$BSC_FOLDER/DEBIAN
