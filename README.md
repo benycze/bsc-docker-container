@@ -45,11 +45,11 @@ This command builds the image named localhost/bsc-compiler and it also uses 4 jo
 The following command can be used to runt the image and mount the local working directory.
 
 ```bash
-docker run --rm -t -i --mount=type=bind,source=~/bsc-work,destination=/bsc-work localhost/bsc-compiler bash
+docker run --rm -t -i --mount=type=bind,source=/home/user/bsc-work,destination=/bsc-work localhost/bsc-compiler bash
 ```
 
 This command will do the following:
 
 * Starts the container from the localhost/bsc-compiler image
-* Mounts the local ~/bsc-work directory into /bsc-work directory inside the image
+* Mounts the local /home/user/bsc-work directory into /bsc-work directory inside the image
 * Starts the container and attach the console
