@@ -1,5 +1,7 @@
 # Bluespec Compiler Docker
 
+[![Build Status](https://benycze.semaphoreci.com/badges/bsc-docker-container/branches/master.svg?style=shields)](https://benycze.semaphoreci.com/projects/bsc-docker-container)
+
 This repository contains a prepared build script of Bluespec compiler for the Docker tool. This is useful if you don't want to deal with dependencies in your favourite Linux distribution (or in Windows).
 
 The only thing you need is to install the [Docker](https://www.docker.com/) or [Podman](https://podman.io/) (use the Podman tool because it is much better ;)).
