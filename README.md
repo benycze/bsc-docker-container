@@ -38,7 +38,7 @@ The image is then built quite easily (the following example is for docker but yo
 docker build -t localhost/bsc-compiler --build-arg BJOBS=4 .
 ```
 
-This command builds the image named localhost/bsc-compiler and it also uses 4 jobs to build the tool. You can also adjust the BJOBS if you need to use less or more CPU cores to build the image.
+This command builds the image named localhost/bsc-compiler and it also uses 4 jobs to build the tool. You can also adjust the BJOBS if you need to use less or more CPU cores to build the image. Image for docker is built using the `build-image.sh`.
 
 ## How to run the image
 
