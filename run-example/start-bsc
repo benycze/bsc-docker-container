@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# Copyright 2019 by the bsc docker image contributors
+# SPDX-License-Identifier: GPL-3.0-only
+#
+# Author(s): Pavel Benacek <pavel.benacek@gmail.com>
+
+#
+# This file can be used as the initial template for your own start-up file.
+# Fill the mount folder using the: 
+#   --mount=type=bind,source=/home/user/bsc-work,destination=/bsc-work
+
+docker run --rm -t -i -e DISPLAY \
+    -v /tmp/.X11-unix/:/tmp/.X11-unix:ro -v $XAUTHORITY:$XAUTHORITY:ro \
+    --user=$USER localhost/bsc-compiler /bin/bash
