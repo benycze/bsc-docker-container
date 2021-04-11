@@ -62,11 +62,11 @@ In a case that you want to run the image using a normal account:
 docker run --user=$USER --rm -t -i --mount=type=bind,source=/home/user/bsc-work,destination=/bsc-work localhost/bsc-compiler bash
 ```
 
-## How to run the X11 App
+## How to run the X11 App - BDW tool
 
 The image also contains the Bluespec Development Workstation together with possibility to run X11 apps
 on your X window system. Basically you need export your local XAuthority variable and X11 socket from
-your system into the container (detailed explemention [here](https://blog.artis3nal.com/2020-09-13-container-gui-app-pgmodeler/))
+your system into the container (detailed explemention [here](https://blog.artis3nal.com/2020-09-13-container-gui-app-pgmodeler/)).
 
 Check your environment for these variables:
 * XAUTHORITY (if not defined run the `export XAUTHORITY=$(xauth info | grep "Authority file" | awk '{ print $3 }')` command)
