@@ -13,10 +13,7 @@ ARG GID=1000
 ARG PASS=password
 
 # Copy downloaded repos
-COPY scripts/reps/bsc /bluespec/bsc
-COPY scripts/reps/bsc-contrib /bluespec/bsc-contrib
-COPY scripts/reps/doc /bluespec/doc
-COPY scripts/reps/bdw /bluespec/bdw
+COPY scripts/reps /bluespec/
 COPY scripts/build-new-package.sh /bluespec
 
 # Install tooling a
