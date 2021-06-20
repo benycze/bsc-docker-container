@@ -46,6 +46,12 @@ sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-10 70
 # Export the number of build jobs
 export JOBS=$4
 
+# Common build root directory
+pwd
+ls
+REPS_ROOT=`pwd`/reps
+BUILD_ROOT=`pwd`/buildroot
+
 echo '# ###############################################################################'
 echo '# # Prepare the BSC '
 echo '# ###############################################################################'
@@ -59,12 +65,13 @@ echo "  - version: $BSC_VERSION"
 echo "  - reqs: $BSC_REQS"
 
 BSC_FOLDER="bsc_$1"
-mkdir -p buildroot/$BSC_FOLDER
-(cd bsc; make -j $JOBS GHCJOBS=$JOBS  PREFIX=/bluespec/buildroot/$BSC_FOLDER all)
+BSC_BUILD_ROOT=$BUILD_ROOT/$BSC_FOLDER
+mkdir -p $BSC_BUILD_ROOT
+(cd $REPS_ROOT/bsc; make -j $JOBS GHCJOBS=$JOBS  PREFIX=$BSC_BUILD_ROOT all)
 
 echo "Preparing the bsc package metadata ..."
-mkdir -p buildroot/$BSC_FOLDER/DEBIAN
-cat << -EOF > buildroot/$BSC_FOLDER/DEBIAN/control
+mkdir -p $BSC_BUILD_ROOT/DEBIAN
+cat << -EOF > $BSC_BUILD_ROOT/DEBIAN/control
 Package: bsc
 Version: $BSC_VERSION
 Section: base
@@ -77,7 +84,7 @@ Description: Bluespec System Verilog Compiler
  prototyping of digital designs. More information available from https://github.com/B-Lang-org/bsc
 -EOF
 
-(cd buildroot; dpkg-deb --build $BSC_FOLDER; dpkg -i bsc_*.deb)
+(cd $BUILD_ROOT; dpkg-deb --build $BSC_FOLDER; dpkg -i bsc_*.deb)
 
 echo '# ###############################################################################'
 echo '# # Prepare the BSC Library'
@@ -92,13 +99,13 @@ echo "  - version: $BSCC_VERSION"
 echo "  - reqs: $BSCC_DEPS"
 
 BSC_CONTRIB_FOLDER="bsc-contrib_$BSCC_VERSION"
-mkdir -p buildroot/$BSC_CONTRIB_FOLDER
-(cd bsc-contrib; make -j $JOBS PREFIX=/bluespec/buildroot/$BSC_CONTRIB_FOLDER)
-
+BSC_CONTRIB_BUILD_ROOT=$BUILD_ROOT/$BSC_CONTRIB_FOLDER
+mkdir -p $BSC_CONTRIB_BUILD_ROOT
+(cd $REPS_ROOT/bsc-contrib; make -j $JOBS PREFIX=$BSC_CONTRIB_BUILD_ROOT)
 
 echo "Preparing the bsc-contrib package metadata ..."
-mkdir -p buildroot/$BSC_CONTRIB_FOLDER/DEBIAN
-cat << -EOF > buildroot/$BSC_CONTRIB_FOLDER/DEBIAN/control
+mkdir -p $BSC_CONTRIB_BUILD_ROOT/DEBIAN
+cat << -EOF > $BSC_CONTRIB_BUILD_ROOT/DEBIAN/control
 Package: bsc-contrib
 Version: $BSCC_VERSION
 Section: base
@@ -110,7 +117,7 @@ Description: Bluespec System Verilog Contributions
  Additional libs for Bluespec. Available from https://github.com/B-Lang-org/bsc-contrib.
 -EOF
 
-(cd buildroot; dpkg-deb --build $BSC_CONTRIB_FOLDER; dpkg -i bsc-contrib*.deb)
+(cd $BUILD_ROOT; dpkg-deb --build $BSC_CONTRIB_FOLDER; dpkg -i bsc-contrib*.deb)
 
 echo '###############################################################################'
 echo '# Prepare the BDW'
@@ -125,12 +132,13 @@ echo "  - version: $BDW_DEPS"
 echo "  - reqs: $BDW_VERSION"
 
 BDW_FOLDER="bdw_${BDW_VERSION}"
-mkdir -p buildroot/$BDW_FOLDER
-(cd bdw; make PREFIX=/bluespec/buildroot/$BDW_FOLDER)
+BDW_FOLDER_BUILD_ROOT=$BUILD_ROOT/$BDW_FOLDER
+mkdir -p $BDW_FOLDER_BUILD_ROOT
+(cd $REPS_ROOT/bdw; make PREFIX=$BDW_FOLDER_BUILD_ROOT)
 
 echo "Preparing the bdw package metadata ..."
-mkdir -p buildroot/$BDW_FOLDER/DEBIAN
-cat << -EOF > buildroot/$BDW_FOLDER/DEBIAN/control
+mkdir -p $BDW_FOLDER_BUILD_ROOT/DEBIAN
+cat << -EOF > $BDW_FOLDER_BUILD_ROOT/DEBIAN/control
 Package: bdw
 Version: $BDW_VERSION
 Section: base
@@ -142,18 +150,17 @@ Description: BSC Development Workstation tool.
     Available from https://github.com/B-Lang-org/bdw.
 -EOF
 
-(cd buildroot; dpkg-deb --build $BDW_FOLDER; dpkg -i bdw*.deb)
+(cd $BUILD_ROOT; dpkg-deb --build $BDW_FOLDER; dpkg -i bdw*.deb)
 
 echo '###############################################################################'
 echo '# Cleanup'
 echo '###############################################################################'
 
 echo "Removing build directory ..."
-rm -rf buildroot
+rm -rf $BUILD_ROOT
 
 echo '###############################################################################'
 echo '# Done!'
 echo '###############################################################################'
-
 
 exit 0
