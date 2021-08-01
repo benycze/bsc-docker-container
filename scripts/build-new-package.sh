@@ -65,7 +65,7 @@ echo "  - reqs: $BSC_REQS"
 BSC_FOLDER="bsc_$1"
 BSC_BUILD_ROOT=$BUILD_ROOT/$BSC_FOLDER
 mkdir -p $BSC_BUILD_ROOT
-(cd $REPS_ROOT/bsc; make -j $JOBS GHCJOBS=$JOBS  PREFIX=$BSC_BUILD_ROOT all)
+(cd $REPS_ROOT/bsc; make -j $JOBS GHCJOBS=$JOBS  PREFIX=$BSC_BUILD_ROOT install-src)
 
 echo "Preparing the bsc package metadata ..."
 mkdir -p $BSC_BUILD_ROOT/DEBIAN
