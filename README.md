@@ -6,7 +6,7 @@ This repository contains a prepared build script of Bluespec compiler for the Do
 
 The only thing you need is to install the [Docker](https://www.docker.com/) or [Podman](https://podman.io/) (use the Podman tool because it is much better ;)).
 
-The image  contains elementary development tools, [Bluespec compiler](https://github.com/B-Lang-org/bsc), [Bluespec documentation and examples](https://github.com/BSVLang/Main.git), [Bluespec contribution library](https://github.com/B-Lang-org/bsc-contrib) and [BSC Development Workstation](https://github.com/B-Lang-org/bdw).
+The image  contains elementary development tools, [Bluespec compiler](https://github.com/B-Lang-org/bsc), [Bluespec contribution library](https://github.com/B-Lang-org/bsc-contrib) and [BSC Development Workstation](https://github.com/B-Lang-org/bdw).
 
 ## How to download and build the image
 

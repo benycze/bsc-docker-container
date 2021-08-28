@@ -25,7 +25,7 @@ if [ $# -ne 4 ]; then
     exit 1
 fi
 
-BUILD_PACKAGES="build-essential autotools-dev autoconf git libfontconfig1-dev libx11-dev libxft-dev gperf flex bison ccache"
+BUILD_PACKAGES="build-essential autotools-dev autoconf git libfontconfig1-dev libx11-dev libxft-dev gperf flex bison ccache texlive-latex-base texlive-latex-recommended texlive-latex-extra texlive-font-utils texlive-fonts-extra"
 BSC_DEPS_PACKAGES="iverilog ghc libghc-regex-compat-dev libghc-syb-dev libghc-old-time-dev libghc-split-dev libelf-dev gcc-8 g++-8 gcc-9 g++-9 gcc-10 g++-10 tcl-dev itcl3-dev tcl-dev tk-dev itk3-dev xvfb verilator"
 BDW_DEPS_PACKAGES="gtkwave graphviz emacs vim-gtk"
 
@@ -65,7 +65,7 @@ echo "  - reqs: $BSC_REQS"
 BSC_FOLDER="bsc_$1"
 BSC_BUILD_ROOT=$BUILD_ROOT/$BSC_FOLDER
 mkdir -p $BSC_BUILD_ROOT
-(cd $REPS_ROOT/bsc; make -j $JOBS GHCJOBS=$JOBS  PREFIX=$BSC_BUILD_ROOT install-src)
+(cd $REPS_ROOT/bsc; make -j $JOBS GHCJOBS=$JOBS PREFIX=$BSC_BUILD_ROOT install-src; make PREFIX=$BSC_BUILD_ROOT install-doc)
 
 echo "Preparing the bsc package metadata ..."
 mkdir -p $BSC_BUILD_ROOT/DEBIAN
