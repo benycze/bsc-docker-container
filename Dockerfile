@@ -15,7 +15,6 @@ ARG PASS=password
 # Copy downloaded repos into image
 COPY scripts/reps/bsc /bluespec/reps/bsc
 COPY scripts/reps/bsc-contrib /bluespec/reps/bsc-contrib
-COPY scripts/reps/doc /bluespec/reps/doc
 COPY scripts/reps/bdw /bluespec/reps/bdw
 COPY scripts/build-new-package.sh /bluespec
 
