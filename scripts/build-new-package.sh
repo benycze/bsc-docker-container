@@ -73,7 +73,7 @@ echo "  - reqs: $BSC_REQS"
 BSC_FOLDER="bsc_$1"
 BSC_BUILD_ROOT=$BUILD_ROOT/$BSC_FOLDER
 mkdir -p $BSC_BUILD_ROOT
-(cd $REPS_ROOT/bsc; make -j $JOBS GHCJOBS=$JOBS PREFIX=$BSC_BUILD_ROOT install-src; [ $DOC_EN -eq 1 ] && make PREFIX=$BSC_BUILD_ROOT install-doc)
+(cd $REPS_ROOT/bsc; make -j $JOBS GHCJOBS=$JOBS PREFIX=$BSC_BUILD_ROOT install-src; if [ $DOC_EN -eq 1 ]; then make PREFIX=$BSC_BUILD_ROOT install-doc; fi)
 
 echo "Preparing the bsc package metadata ..."
 mkdir -p $BSC_BUILD_ROOT/DEBIAN
