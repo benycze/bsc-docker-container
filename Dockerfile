@@ -11,6 +11,7 @@ ARG USER=user
 ARG UID=1000
 ARG GID=1000
 ARG PASS=password
+ARG DOC=0
 
 # Copy downloaded repos into image
 COPY scripts/reps/bsc /bluespec/reps/bsc
@@ -31,4 +32,4 @@ RUN groupadd --gid $GID $USER && \
     echo "$USER:$PASS" | chpasswd
 
 # Build Bluespec tools
-RUN cd /bluespec && bash ./build-new-package.sh 1.0.0 1.0.0 1.0.0 $BJOBS
+RUN cd /bluespec && bash ./build-new-package.sh 1.0.0 1.0.0 1.0.0 $BJOBS $DOC
