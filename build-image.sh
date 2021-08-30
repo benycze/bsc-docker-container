@@ -4,11 +4,19 @@ set -e
 echo "Cleaning the folder ..."
 git clean -d -f -f -x .
 
+DOC_BUILD=${DOC:-0}
+echo "Documentation build is: "
+if [ $DOC_BUILD -eq 1 ]; then
+    echo "  * Yes"
+else
+    echo "  * No"
+fi
+
 echo "Downloading all folders ..."
 cd scripts && bash bootstrap.sh && cd ..
 
 echo "Building the Bluespec docker image ..."
 docker build -t localhost/bsc-compiler --build-arg BJOBS=4 --build-arg USER=$USER \
-    --build-arg UID=`id -u` --build-arg `id -g` .
+    --build-arg UID=`id -u` --build-arg `id -g` --build-arg DOC=${DOC_BUILD} .
 
 echo "Done!"
