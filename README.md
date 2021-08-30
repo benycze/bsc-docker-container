@@ -6,7 +6,7 @@ This repository contains a prepared build script of Bluespec compiler for the Do
 
 The only thing you need is to install the [Docker](https://www.docker.com/) or [Podman](https://podman.io/) (use the Podman tool because it is much better ;)).
 
-The image  contains elementary development tools, [Bluespec compiler](https://github.com/B-Lang-org/bsc), [Bluespec documentation and examples](https://github.com/BSVLang/Main.git), [Bluespec contribution library](https://github.com/B-Lang-org/bsc-contrib) and [BSC Development Workstation](https://github.com/B-Lang-org/bdw).
+The image  contains elementary development tools, [Bluespec compiler](https://github.com/B-Lang-org/bsc), [Bluespec contribution library](https://github.com/B-Lang-org/bsc-contrib) and [BSC Development Workstation](https://github.com/B-Lang-org/bdw).
 
 ## How to download and build the image
 
@@ -36,11 +36,11 @@ git checkout devel
 The image is then built quite easily (the following example is for docker but you can use the same command using the [podman](https://podman.io/) tool):
 
 ```bash
-docker build -t localhost/bsc-compiler --build-arg BJOBS=4 --build-arg USER=$USER --build-arg UID=`id -u` --build-arg `id -g` .
+docker build -t localhost/bsc-compiler --build-arg BJOBS=4 --build-arg USER=$USER --build-arg UID=`id -u` --build-arg `id -g` --build-arg DOC=1 .
 ```
 
-This command builds the image named localhost/bsc-compiler and it also uses 4 jobs to build the tool. You can also adjust the BJOBS if you need to use less or more CPU cores to build the image. Image for docker is built using the `build-image.sh`.
-Variables UID, USER and GID are used for the creation of local account with admin rights via the `sudo` tool.
+This command builds the image named localhost/bsc-compiler and it also uses 4 jobs to build the tool. You can also adjust the BJOBS if you need to use less or more CPU cores to build the image. Image for docker is built using the `build-image.sh` (you can also run `DOC=1 ./build-image.sh` if you want to enforce documentation build).
+Variables UID, USER and GID are used for the creation of local account with admin rights via the `sudo` tool. THe DOC parameters is used for the documentation build - disabled by default because you can build it directly outside the docker image. However, it is possible to turn it on and copy files outside of running docker image (folder /doc) to host.
 
 ## How to run the image (just a console)
 
@@ -80,3 +80,4 @@ docker run --rm -t -i -e DISPLAY -v /tmp/.X11-unix/:/tmp/.X11-unix:ro -v $XAUTHO
 
 You should be fine to run the graphic app from the container image (you can check it using the `gvim`).
 The example of image start script is inside the `run-example` folder.
+
