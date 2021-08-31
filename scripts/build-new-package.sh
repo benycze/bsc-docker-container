@@ -19,21 +19,32 @@ echo '# ########################################################################
 echo '# # Deps install'
 echo '# ###############################################################################'
 
-if [ $# -ne 4 ]; then
-    echo "Insert the version of packages (bsc and then the version of the contrib) and number of jobs. For example (version 0.1.1 0.2.2 4 0.5.6)"
-    echo "$0 0.1.1 4 0.2.2 0.1.2 4"
+if [ $# -ne 5 ]; then
+    echo "Insert the version of packages (bsc and then the version of the contrib) and number of jobs and 0/1 for documentation build. For example (version 0.1.1 0.2.2 4 0.5.6 1)"
+    echo "$0 0.1.1 4 0.2.2 0.1.2 4 1"
     exit 1
 fi
 
+# Export the number of build jobs
+export JOBS=$4
+export DOC_EN=$5
+
+# Required packages
 BUILD_PACKAGES="build-essential autotools-dev autoconf git libfontconfig1-dev libx11-dev libxft-dev gperf flex bison ccache"
 BSC_DEPS_PACKAGES="iverilog ghc libghc-regex-compat-dev libghc-syb-dev libghc-old-time-dev libghc-split-dev libelf-dev gcc-8 g++-8 gcc-9 g++-9 gcc-10 g++-10 tcl-dev itcl3-dev tcl-dev tk-dev itk3-dev xvfb verilator"
 BDW_DEPS_PACKAGES="gtkwave graphviz emacs vim-gtk"
+DOC_BUILD_PACKAGES="texlive-latex-base texlive-latex-recommended texlive-latex-extra texlive-font-utils texlive-fonts-extra"
 
 echo "Checkinstall is required ..."
-sudo apt install -y checkinstall
+sudo apt-get install -y checkinstall
 
 echo "Installing packages ..."
-sudo apt-get  install -y $BUILD_PACKAGES $BSC_DEPS_PACKAGES $BDW_DEPS_PACKAGES
+sudo apt-get install -y $BUILD_PACKAGES $BSC_DEPS_PACKAGES $BDW_DEPS_PACKAGES
+
+if [ $DOC_EN -eq 1 ]; then
+    echo "Installing LaTeX packages ..."
+    sudo apt-get install -y $DOC_BUILD_PACKAGES
+fi
 
 echo "Installing alternatives for older gcc ..."
 sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-8 50
@@ -42,9 +53,6 @@ sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-10 70
 sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-8 50
 sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-9 60
 sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-10 70
-
-# Export the number of build jobs
-export JOBS=$4
 
 # Common build root directory
 REPS_ROOT=`pwd`/reps
@@ -65,7 +73,7 @@ echo "  - reqs: $BSC_REQS"
 BSC_FOLDER="bsc_$1"
 BSC_BUILD_ROOT=$BUILD_ROOT/$BSC_FOLDER
 mkdir -p $BSC_BUILD_ROOT
-(cd $REPS_ROOT/bsc; make -j $JOBS GHCJOBS=$JOBS  PREFIX=$BSC_BUILD_ROOT install-src)
+(cd $REPS_ROOT/bsc; make -j $JOBS GHCJOBS=$JOBS PREFIX=$BSC_BUILD_ROOT install-src; if [ $DOC_EN -eq 1 ]; then make PREFIX=$BSC_BUILD_ROOT install-doc; fi)
 
 echo "Preparing the bsc package metadata ..."
 mkdir -p $BSC_BUILD_ROOT/DEBIAN
