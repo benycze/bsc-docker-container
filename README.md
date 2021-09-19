@@ -36,10 +36,10 @@ git checkout devel
 The image is then built quite easily (the following example is for docker but you can use the same command using the [podman](https://podman.io/) tool):
 
 ```bash
-docker build -t localhost/bsc-compiler --build-arg BJOBS=4 --build-arg USER=$USER --build-arg UID=`id -u` --build-arg `id -g` --build-arg DOC=1 .
+docker build --rm -t localhost/bsc-compiler --build-arg BJOBS=4 --build-arg USER=$USER --build-arg UID=`id -u` --build-arg `id -g` --build-arg DOC=1 .
 ```
 
-This command builds the image named localhost/bsc-compiler and it also uses 4 jobs to build the tool. You can also adjust the BJOBS if you need to use less or more CPU cores to build the image. Image for docker is built using the `build-image.sh` (you can also run `DOC=1 ./build-image.sh` if you want to enforce documentation build).
+This command builds the image named localhost/bsc-compiler and it also uses 4 jobs to build the tool. You can also adjust the BJOBS if you need to use less or more CPU cores to build the image. Image for docker is built using the `build-image.sh` (you can also run `env DOC=1 ./build-image.sh` if you want to enforce documentation build).
 Variables UID, USER and GID are used for the creation of local account with admin rights via the `sudo` tool. THe DOC parameters is used for the documentation build - disabled by default because you can build it directly outside the docker image. However, it is possible to turn it on and copy files outside of running docker image (folder /doc) to host.
 
 ## How to run the image (just a console)
