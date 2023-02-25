@@ -3,7 +3,7 @@
 #
 # Author(s): Pavel Benacek <pavel.benacek@gmail.com>
 
-FROM ubuntu:20.04
+FROM ubuntu:22.04
 
 # Defeault argument values
 ARG BJOBS=1
@@ -19,7 +19,7 @@ COPY scripts/reps/bsc-contrib /bluespec/reps/bsc-contrib
 COPY scripts/reps/bdw /bluespec/reps/bdw
 COPY scripts/build-new-package.sh /bluespec
 
-# Install tooling a
+# Install tooling and editors
 RUN apt update && apt upgrade -y && \
     DEBIAN_FRONTEND=noninteractive apt install -y tzdata sudo vim software-properties-common \
                                                 sudo xauth vim-gtk graphviz

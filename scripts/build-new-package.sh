@@ -31,7 +31,7 @@ export DOC_EN=$5
 
 # Required packages
 BUILD_PACKAGES="build-essential autotools-dev autoconf git libfontconfig1-dev libx11-dev libxft-dev gperf flex bison ccache"
-BSC_DEPS_PACKAGES="iverilog ghc libghc-regex-compat-dev libghc-syb-dev libghc-old-time-dev libghc-split-dev libelf-dev gcc-8 g++-8 gcc-9 g++-9 gcc-10 g++-10 tcl-dev itcl3-dev tcl-dev tk-dev itk3-dev xvfb verilator"
+BSC_DEPS_PACKAGES="iverilog ghc libghc-regex-compat-dev libghc-syb-dev libghc-old-time-dev libghc-split-dev libelf-dev tcl-dev itcl3-dev tcl-dev tk-dev itk3-dev xvfb verilator"
 BDW_DEPS_PACKAGES="gtkwave graphviz emacs vim-gtk"
 DOC_BUILD_PACKAGES="texlive-latex-base texlive-latex-recommended texlive-latex-extra texlive-font-utils texlive-fonts-extra"
 
@@ -45,14 +45,6 @@ if [ $DOC_EN -eq 1 ]; then
     echo "Installing LaTeX packages ..."
     sudo apt-get install -y $DOC_BUILD_PACKAGES
 fi
-
-echo "Installing alternatives for older gcc ..."
-sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-8 50
-sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9 60
-sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-10 70
-sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-8 50
-sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-9 60
-sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-10 70
 
 # Common build root directory
 REPS_ROOT=`pwd`/reps
