@@ -31,7 +31,7 @@ export DOC_EN=$5
 
 # Required packages
 BUILD_PACKAGES="build-essential autotools-dev autoconf git libfontconfig1-dev libx11-dev libxft-dev gperf flex bison ccache"
-BSC_DEPS_PACKAGES="iverilog ghc libghc-regex-compat-dev libghc-syb-dev libghc-old-time-dev libghc-split-dev libelf-dev tcl-dev itcl3-dev tcl-dev tk-dev itk3-dev xvfb verilator"
+BSC_DEPS_PACKAGES="iverilog libelf-dev tcl-dev itcl3-dev tcl-dev tk-dev itk3-dev xvfb verilator"
 BDW_DEPS_PACKAGES="gtkwave graphviz emacs vim-gtk"
 DOC_BUILD_PACKAGES="texlive-latex-base texlive-latex-recommended texlive-latex-extra texlive-font-utils texlive-fonts-extra"
 
