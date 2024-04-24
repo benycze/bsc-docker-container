@@ -36,14 +36,14 @@ BDW_DEPS_PACKAGES="gtkwave graphviz emacs vim-gtk"
 DOC_BUILD_PACKAGES="texlive-latex-base texlive-latex-recommended texlive-latex-extra texlive-font-utils texlive-fonts-extra"
 
 echo "Checkinstall is required ..."
-sudo apt-get install -y checkinstall
+apt-get install -y checkinstall
 
 echo "Installing packages ..."
-sudo apt-get install -y $BUILD_PACKAGES $BSC_DEPS_PACKAGES $BDW_DEPS_PACKAGES
+apt-get install -y $BUILD_PACKAGES $BSC_DEPS_PACKAGES $BDW_DEPS_PACKAGES
 
 if [ $DOC_EN -eq 1 ]; then
     echo "Installing LaTeX packages ..."
-    sudo apt-get install -y $DOC_BUILD_PACKAGES
+    apt-get install -y $DOC_BUILD_PACKAGES
 fi
 
 # Common build root directory
