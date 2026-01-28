@@ -12,7 +12,7 @@ ARG UID=1000
 ARG GID=1000
 ARG PASS=password
 ARG DOC=0
-ARG GHC_VERSION="9.4.8"
+ARG GHC_VERSION="9.12"
 ARG CABAL_VERSION="latest"
 
 # Copy downloaded repos into image
@@ -34,7 +34,7 @@ RUN curl https://downloads.haskell.org/~ghcup/x86_64-linux-ghcup > /usr/local/bi
     chmod +x /usr/local/bin/ghcup
 RUN ghcup -v install ghc --isolate /usr/local --force $GHC_VERSION && \
     ghcup -v install cabal --isolate /usr/local/bin --force $CABAL_VERSION
-RUN cabal update && cabal v1-install old-time regex-compat split syb
+RUN cabal update && cabal v1-install regex-compat syb old-time split strict-concurrency
 
 # Add user into the system
 RUN groupadd --gid $GID $USER && \
